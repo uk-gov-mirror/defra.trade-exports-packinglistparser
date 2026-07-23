@@ -6,10 +6,12 @@
  */
 
 import { pdfGiovanniHeaders } from './model-headers/giovanni.js'
+import { pdfGreggsHeaders } from './model-headers/greggs.js'
 import { pdfMandsHeaders } from './model-headers/mands.js'
 
 const modelHeadersPdf = {
   ...pdfGiovanniHeaders,
+  ...pdfGreggsHeaders,
   ...pdfMandsHeaders
 }
 

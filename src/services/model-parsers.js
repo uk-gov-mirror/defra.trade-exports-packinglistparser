@@ -107,6 +107,10 @@ import { parse as parseTesco3 } from './parsers/tesco/model3.js'
 import { matches as matchesMands1 } from './matchers/mands/model1.js'
 import { parse as parseMands1 } from './parsers/mands/model1.js'
 
+// Greggs PDF parsers
+import { matches as matchesGreggs1 } from './matchers/greggs/model1.js'
+import { parse as parseGreggs1 } from './parsers/greggs/model1.js'
+
 // Mars Excel parsers
 import { matches as matchesMars1 } from './matchers/mars/model1.js'
 import { parse as parseMars1 } from './parsers/mars/model1.js'
@@ -281,6 +285,10 @@ const parsersPdfNonAi = {
   GIOVANNI3: {
     matches: matchesGiovanni3,
     parse: parseGiovanni3
+  },
+  GREGGS1: {
+    matches: matchesGreggs1,
+    parse: parseGreggs1
   },
   MANDS1: {
     matches: matchesMands1,
