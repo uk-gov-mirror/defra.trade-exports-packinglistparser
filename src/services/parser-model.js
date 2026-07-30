@@ -47,6 +47,9 @@ export default Object.freeze({
   // Gousto models
   GOUSTO1: 'GOUSTO1',
 
+  // Greggs models
+  GREGGS1: 'GREGGS1',
+
   // M&S models
   MANDS1: 'MANDS1',
 
