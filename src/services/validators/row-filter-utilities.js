@@ -247,7 +247,8 @@ const MEANINGFUL_FIELDS = [
   'total_net_weight_kg'
 ]
 
-const NOT_APPLICABLE_PATTERN = /^n\/?a$/i
+// Matches N/A, NA, n/a and the Excel error variants #N/A, #NA
+const NOT_APPLICABLE_PATTERN = /^#?n\/?a$/i
 
 /**
  * Check if a mapped item value carries no meaningful data.

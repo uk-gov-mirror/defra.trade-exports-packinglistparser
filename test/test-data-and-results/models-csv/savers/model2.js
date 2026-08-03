@@ -140,18 +140,18 @@ const invalidModel = [
 
 // Filler row of blank/N/A/zero values - no meaningful data, should be dropped.
 const fillerRowNotApplicable = [
-  '',
-  '',
-  'N/A',
-  '',
-  '',
   '0',
-  'N/A',
+  '0',
+  '0',
+  '0',
   '0',
   '0.000',
-  'N/A',
-  'N/A',
-  'N/A'
+  '0',
+  '0',
+  '0.000',
+  '#N/A',
+  '#N/A',
+  '#N/A'
 ]
 
 // Filler row carrying a spurious commodity code but no real product data.

@@ -548,6 +548,21 @@ describe('Row Filter Utilities', () => {
       expect(hasNoMeaningfulData(row)).toBe(true)
     })
 
+    test('should treat Excel #N/A error values as meaningless', () => {
+      const row = {
+        description: '0',
+        nature_of_products: '#N/A',
+        type_of_treatment: '#N/A',
+        commodity_code: '0',
+        country_of_origin: '0',
+        nirms: '#N/A',
+        number_of_packages: '0',
+        total_net_weight_kg: '0.000',
+        total_net_weight_unit: 'KGs'
+      }
+      expect(hasNoMeaningfulData(row)).toBe(true)
+    })
+
     test('should treat numeric zero values as meaningless', () => {
       const row = {
         description: '',
