@@ -12,6 +12,7 @@ import { mapParser } from '../../parser-map.js'
 import { matchesHeader } from '../../matches-header.js'
 import MatcherResult from '../../matcher-result.js'
 import * as regex from '../../../utilities/regex.js'
+import { hasNoMeaningfulData } from '../../validators/row-filter-utilities.js'
 
 const logger = createLogger()
 
@@ -58,6 +59,12 @@ export function parse(packingListCsv) {
       dataRow,
       csvHeaders.SAVERS2,
       null
+    )
+
+    // Drop filler rows (blank/N/A/zero) so they are excluded from validation.
+    // Filtering the mapped items preserves each survivor's original row number.
+    packingListContents = packingListContents.filter(
+      (row) => !hasNoMeaningfulData(row)
     )
 
     return combineParser.combine(

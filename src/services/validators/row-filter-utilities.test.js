@@ -6,7 +6,8 @@ import {
   isTotalsRow,
   isRepeatedHeaderRow,
   isEmptyRow,
-  filterValidatableRows
+  filterValidatableRows,
+  hasNoMeaningfulData
 } from './row-filter-utilities.js'
 
 describe('Row Filter Utilities', () => {
@@ -501,6 +502,117 @@ describe('Row Filter Utilities', () => {
       expect(result[0]).toHaveProperty('originalIndex', 1)
       expect(result[0]).toHaveProperty('actualRowNumber', 2)
       expect(result[0]).toHaveProperty('sheetName', 'TestSheet')
+    })
+  })
+
+  describe('hasNoMeaningfulData', () => {
+    const meaningfulRow = {
+      description: 'HARMONY HAIRSPRAY FIRM 225ML',
+      nature_of_products: 'Ambient',
+      type_of_treatment: 'Unprocessed',
+      commodity_code: '3305900000',
+      country_of_origin: 'GB',
+      nirms: 'No',
+      number_of_packages: '1',
+      total_net_weight_kg: '2.680',
+      total_net_weight_unit: 'kg'
+    }
+
+    test('should return false for a genuine data row', () => {
+      expect(hasNoMeaningfulData(meaningfulRow)).toBe(false)
+    })
+
+    test('should return true when every meaningful field is empty or null', () => {
+      const row = {
+        description: '',
+        nature_of_products: null,
+        type_of_treatment: undefined,
+        country_of_origin: '   ',
+        nirms: '',
+        number_of_packages: null,
+        total_net_weight_kg: ''
+      }
+      expect(hasNoMeaningfulData(row)).toBe(true)
+    })
+
+    test('should treat N/A, NA and n/a values as meaningless', () => {
+      const row = {
+        description: 'N/A',
+        nature_of_products: 'NA',
+        type_of_treatment: 'n/a',
+        country_of_origin: 'N/A',
+        nirms: 'N/A',
+        number_of_packages: 'N/A',
+        total_net_weight_kg: 'N/A'
+      }
+      expect(hasNoMeaningfulData(row)).toBe(true)
+    })
+
+    test('should treat numeric zero values as meaningless', () => {
+      const row = {
+        description: '',
+        nature_of_products: '',
+        type_of_treatment: '',
+        country_of_origin: '',
+        nirms: '',
+        number_of_packages: '0',
+        total_net_weight_kg: '0.00'
+      }
+      expect(hasNoMeaningfulData(row)).toBe(true)
+    })
+
+    test('should ignore commodity code when deciding meaningfulness', () => {
+      const row = {
+        description: '',
+        nature_of_products: '',
+        type_of_treatment: '',
+        commodity_code: '7777777777',
+        country_of_origin: '',
+        nirms: '',
+        number_of_packages: '0',
+        total_net_weight_kg: '0.00'
+      }
+      expect(hasNoMeaningfulData(row)).toBe(true)
+    })
+
+    test('should ignore net weight unit when deciding meaningfulness', () => {
+      const row = {
+        description: '',
+        nature_of_products: '',
+        type_of_treatment: '',
+        country_of_origin: '',
+        nirms: '',
+        number_of_packages: '0',
+        total_net_weight_kg: '0',
+        total_net_weight_unit: 'kg'
+      }
+      expect(hasNoMeaningfulData(row)).toBe(true)
+    })
+
+    test('should keep row with a non-zero package count', () => {
+      const row = {
+        description: '',
+        nature_of_products: '',
+        type_of_treatment: '',
+        country_of_origin: '',
+        nirms: '',
+        number_of_packages: '2',
+        total_net_weight_kg: '0'
+      }
+      expect(hasNoMeaningfulData(row)).toBe(false)
+    })
+
+    test('should keep row with a non-zero net weight', () => {
+      const row = {
+        description: '',
+        nature_of_products: '',
+        type_of_treatment: '',
+        country_of_origin: '',
+        nirms: '',
+        number_of_packages: '0',
+        total_net_weight_kg: '0.540'
+      }
+      expect(hasNoMeaningfulData(row)).toBe(false)
     })
   })
 })

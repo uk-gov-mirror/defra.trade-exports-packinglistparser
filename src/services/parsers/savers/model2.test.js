@@ -44,6 +44,23 @@ describe('Savers Model 2 CSV Parser', () => {
     expect(result.items.length).toBe(2)
   })
 
+  test('should drop filler rows with no meaningful data', () => {
+    const result = parse(model.modelWithFillerRows)
+    expect(result.items.length).toBe(2)
+    expect(result.items.map((item) => item.description)).toEqual([
+      'HARMONY HAIRSPRAY FIRM 225ML',
+      "HERMESETAS ORIG. 300'S"
+    ])
+  })
+
+  test('should preserve original row numbers after dropping filler rows', () => {
+    const result = parse(model.modelWithFillerRows)
+    // dataRow1 is at row 7; a filler row precedes dataRow2 at row 9.
+    expect(result.items.map((item) => item.row_location.rowNumber)).toEqual([
+      7, 9
+    ])
+  })
+
   test('should handle malformed data without throwing', () => {
     const malformedData = {
       0: ['header'],

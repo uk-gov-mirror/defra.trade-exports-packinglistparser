@@ -56,7 +56,17 @@ const validModel = [
   ['GC Ref: RMS/2026/1721152775211'],
   ['Savers - Packing List'],
   ['Declaration:', declarationText],
-  ['RMS', 'RMS-GB-000247-002', '', 'ENTER BU ID', 'SVNI', '', '', '2544', '5329'],
+  [
+    'RMS',
+    'RMS-GB-000247-002',
+    '',
+    'ENTER BU ID',
+    'SVNI',
+    '',
+    '',
+    '2544',
+    '5329'
+  ],
   [],
   headerRow,
   dataRow1,
@@ -128,11 +138,73 @@ const invalidModel = [
   dataRow2
 ]
 
+// Filler row of blank/N/A/zero values - no meaningful data, should be dropped.
+const fillerRowNotApplicable = [
+  '',
+  '',
+  'N/A',
+  '',
+  '',
+  '0',
+  'N/A',
+  '0',
+  '0.000',
+  'N/A',
+  'N/A',
+  'N/A'
+]
+
+// Filler row carrying a spurious commodity code but no real product data.
+// Should still be dropped because commodity code is not a meaningful field.
+const fillerRowSpuriousCommodity = [
+  '',
+  '',
+  '',
+  '7777777777',
+  '',
+  '0',
+  '',
+  '0',
+  '0.00',
+  '',
+  '',
+  ''
+]
+
+const fillerRowEmpty = ['', '', '', '', '', '', '', '', '', '', '', '']
+
+// Genuine rows interleaved with and followed by filler rows. Used to confirm
+// filler rows are excluded and surviving rows keep their original row numbers.
+const modelWithFillerRows = [
+  ['GC Ref: RMS/2026/1721152775211'],
+  ['Savers - Packing List'],
+  ['Declaration:', declarationText],
+  [
+    'RMS',
+    'RMS-GB-000247-002',
+    '',
+    'ENTER BU ID',
+    'SVNI',
+    '',
+    '',
+    '2544',
+    '5329'
+  ],
+  [],
+  headerRow,
+  dataRow1,
+  fillerRowNotApplicable,
+  dataRow2,
+  fillerRowSpuriousCommodity,
+  fillerRowEmpty
+]
+
 export default {
   validModel,
   emptyModel,
   wrongEstablishmentNumber,
   wrongHeaders,
   invalidModel_MissingColumnCells,
-  invalidModel
+  invalidModel,
+  modelWithFillerRows
 }
