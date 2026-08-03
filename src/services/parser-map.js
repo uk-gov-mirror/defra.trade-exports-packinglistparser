@@ -219,7 +219,7 @@ function getCountryOfOrigin(col, headerCols, hasData) {
     return null
   }
   return (
-    columnValue(col[headerCols.country_of_origin]) ||
+    columnValue(col[headerCols.country_of_origin]) ??
     columnValue(col[headerCols.exempt_country_of_origin])
   )
 }
