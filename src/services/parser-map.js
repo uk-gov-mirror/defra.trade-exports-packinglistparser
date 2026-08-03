@@ -218,9 +218,6 @@ function getCountryOfOrigin(col, headerCols, hasData) {
   if (!hasData) {
     return null
   }
-  // Use nullish coalescing so a falsy-but-present value (e.g. numeric 0) is
-  // preserved and reaches validation as an invalid CoO rather than being
-  // discarded and treated as empty/missing.
   return (
     columnValue(col[headerCols.country_of_origin]) ??
     columnValue(col[headerCols.exempt_country_of_origin])
