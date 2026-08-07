@@ -108,8 +108,9 @@ import { matches as matchesMands1 } from './matchers/mands/model1.js'
 import { parse as parseMands1 } from './parsers/mands/model1.js'
 
 // Greggs PDF parsers
-import { matches as matchesGreggs1 } from './matchers/greggs/model1.js'
-import { parse as parseGreggs1 } from './parsers/greggs/model1.js'
+// GREGGS1 parser temporarily disabled - imports commented out to keep lint clean
+// import { matches as matchesGreggs1 } from './matchers/greggs/model1.js'
+// import { parse as parseGreggs1 } from './parsers/greggs/model1.js'
 
 // Mars Excel parsers
 import { matches as matchesMars1 } from './matchers/mars/model1.js'
@@ -286,10 +287,11 @@ const parsersPdfNonAi = {
     matches: matchesGiovanni3,
     parse: parseGiovanni3
   },
-  GREGGS1: {
-    matches: matchesGreggs1,
-    parse: parseGreggs1
-  },
+  // GREGGS1 parser temporarily disabled - do not activate
+  // GREGGS1: {
+  //   matches: matchesGreggs1,
+  //   parse: parseGreggs1
+  // },
   MANDS1: {
     matches: matchesMands1,
     parse: parseMands1
