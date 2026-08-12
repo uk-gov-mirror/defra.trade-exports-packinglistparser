@@ -94,7 +94,7 @@ function resolveBlanketValueByOffset(blanketConfig, packingListJson) {
  * @param {Array<Object>} packingListJson - Raw packing list data
  * @param {Object} headerCols - Mapped header columns
  * @param {number} headerRow - Header row index
- * @returns {Object} Blanket values (netWeightUnit, blanketNirms, blanketTreatmentType)
+ * @returns {Object} Blanket values (netWeightUnit, blanketNirms, blanketTreatmentType, blanketNatureOfProducts)
  */
 function extractBlanketValues(header, packingListJson, headerCols, headerRow) {
   const netWeightUnit = header.findUnitInHeader
@@ -207,12 +207,12 @@ function getTypeOfTreatment(col, headerCols, blanketValues, hasData) {
 }
 
 /**
- * Get type of treatment value (from column or blanket value).
+ * Get nature of products value (from column or blanket value).
  * @param {Object} col - Row data
  * @param {Object} headerCols - Mapped header columns
  * @param {Object} blanketValues - Blanket values
  * @param {boolean} hasData - Whether row has data
- * @returns {*} Treatment type value
+ * @returns {*} Nature of products value
  */
 function getNatureOfProducts(col, headerCols, blanketValues, hasData) {
   if (!hasData) {
