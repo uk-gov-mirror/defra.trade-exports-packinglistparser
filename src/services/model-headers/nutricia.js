@@ -14,7 +14,7 @@ const nutriciaHeaders = {
       description: /^Description$/i,
       commodity_code: /Commodity Code/i,
       number_of_packages: /Quantity/i,
-      total_net_weight_kg: /Netweight \(KG\)/i
+      total_net_weight_kg: /Net ?Weight \(KG\)/i
     },
     country_of_origin: /Country of origin/i,
     blanketNatureOfProductsValue: {
